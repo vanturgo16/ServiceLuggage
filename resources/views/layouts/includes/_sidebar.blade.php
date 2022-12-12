@@ -55,14 +55,14 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#category">
                         <i class="fas fa-list"></i>
-                        <p>Master Category</p>
+                        <p>Master Luggage</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="category">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="#">
-                                    <span class="sub-item">Luggage</span>
+                                <a href="{{ route('category.index') }}">
+                                    <span class="sub-item">Category</span>
                                 </a>
                             </li>
                             <li>

@@ -74,7 +74,7 @@ class LocationController extends Controller
                 $photo=base64_encode(file_get_contents($request->file('location_photo')));
             }
             else{
-                $photo="";
+                $photo=$request->current_photo;
             }
 
             $ipAddress=$_SERVER['REMOTE_ADDR'];

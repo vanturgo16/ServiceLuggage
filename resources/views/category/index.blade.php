@@ -4,10 +4,10 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Location</h4>
+            <h4 class="page-title">Category</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
-                    <a href="{{ route('home') }}">
+                    <a href="#">
                         <i class="flaticon-home"></i>
                     </a>
                 </li>
@@ -15,7 +15,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('location.index') }}">Location</a>
+                    <a href="#">Category</a>
                 </li>
             </ul>
         </div>
@@ -24,84 +24,61 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">List of Location</h4>
+                            <h4 class="card-title">List of Category</h4>
                             <button class="btn btn-primary btn-round ml-auto btn-sm" data-toggle="modal" data-target="#addRowModal">
                                 <i class="fa fa-plus"></i>
                                 Add Row
                             </button>
                         </div>
                         <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header no-bd">
                                         <h4 class="modal-title">
                                             <span class="fw-mediumbold">Add</span> 
-                                            <span class="fw-light">Location</span>
+                                            <span class="fw-light">Category</span>
                                         </h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                <form action="{{ route('location.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
-                                                    <label>Code</label>
-                                                    <input type="text" class="form-control @error('location_code') is-invalid @enderror" id="location_code" name="location_code" value="{{ old('location_code') }}">
+                                                    <label>Category Name</label>
+                                                    <input type="text" class="form-control @error('category_name') is-invalid @enderror" id="category_name" name="category_name" value="{{ old('category_name') }}">
                                                     
-                                                    @error('location_code')
+                                                    @error('category_name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Name</label>
-                                                    <input type="text" class="form-control @error('location_name') is-invalid @enderror" id="location_name" name="location_name" value="{{ old('location_name') }}">
+                                                    <label>Cost</label>
+                                                    <input type="text" class="form-control @error('cost') is-invalid @enderror" id="cost" name="cost" value="{{ old('cost') }}">
                                                     
-                                                    @error('location_name')
+                                                    @error('cost')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="comment">Address</label>
-                                                    <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" cols="5">
-                                                        {{ old('address') }}
-                                                    </textarea>
-
-                                                    @error('address')
+                                                    <label>Weight (in Kg)</label><br>
+                                                    From
+                                                    <input type="number" class="form-control @error('weight_from') is-invalid @enderror" id="weight_from" name="weight_from" value="{{ old('weight_from') }}">
+                                                    @error('weight_from')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                     @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="comment">Notes (Optional)</label>
-                                                    <textarea class="form-control" id="notes" name="notes" rows="2" cols="5">
-                                                        {{ old('notes') }}
-                                                    </textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Coordinate</label>
-                                                    <input type="text" class="form-control @error('coordinate') is-invalid @enderror" id="coordinate"  name="coordinate" value="{{ old('coordinate') }}">
-                                                    
-                                                    @error('coordinate')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlFile1">Example file input</label>
-                                                    <input type="file" class="form-control-file @error('location_photo') is-invalid @enderror" id="location_photo" name="location_photo">
-                                                    
-                                                    @error('location_photo')
+                                                    Until
+                                                    <input type="number" class="form-control @error('weight_until') is-invalid @enderror" id="weight_until" name="weight_until" value="{{ old('weight_until') }}">
+                                                    @error('weight_until')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -143,21 +120,21 @@
                         </div>
                         @endif
                         <div class="table-responsive">
-                            <table id="tableLocation" class="display table table-hover" >
+                            <table id="tableCategory" class="display table table-hover" >
                                 <thead>
                                     <tr>
-                                        <th>Code Location</th>
-                                        <th>Name Location</th>
-                                        <th>Address</th>
+                                        <th>Category</th>
+                                        <th>Weight Range</th>
+                                        <th>Cost</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody> 
-                                    @foreach ($locations as $item)
+                                    @foreach ($categories as $item)
                                     <tr>
-                                        <td>{{ $item->code }}</td>
-                                        <td>{{ $item->loc_name }}</td>
-                                        <td>{{ $item->loc_address }}</td>
+                                        <td>{{ $item->name_category }}</td>
+                                        <td>{{ $item->weight_from." - ".$item->weight_until." (".$item->unit.")" }}</td>
+                                        <td>{{ "Rp. ".number_format($item->cost,2,",",".") }}</td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <button class="btn btn-warning btn-round ml-auto btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}">
@@ -173,90 +150,61 @@
                                     </tr>
                                     {{-- Modal Edit --}}
                                     <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-dialog modal-sm" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header no-bd">
                                                     <h4 class="modal-title">
                                                         <span class="fw-mediumbold">Update</span> 
-                                                        <span class="fw-light">Location</span>
+                                                        <span class="fw-light">Category</span>
                                                     </h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                            <form action="{{ route('location.update') }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('category.update') }}" method="POST" enctype="multipart/form-data">
                                                 @method('PUT')
                                                 @csrf
                                                     <div class="row">
-                                                        <div class="col-6">
-                                                            <input type="hidden" name="loc_id" id="loc_id" value="{{ $item->id }}">
-                                                            <div class="form-group">
-                                                                <label>Code</label>
-                                                                <input type="text" class="form-control @error('location_code') is-invalid @enderror" id="location_code" name="location_code" value="{{ $item->code }}">
-                                                                
-                                                                @error('location_code')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Name</label>
-                                                                <input type="text" class="form-control @error('location_name') is-invalid @enderror" id="location_name" name="location_name" value="{{ $item->loc_name }}">
-                                                                
-                                                                @error('location_name')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="comment">Address</label>
-                                                                <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" cols="5">
-                                                                    {{ $item->loc_address }}
-                                                                </textarea>
-            
-                                                                @error('address')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-group">
-                                                                <label for="comment">Notes (Optional)</label>
-                                                                <textarea class="form-control" id="notes" name="notes" rows="2" cols="5">
-                                                                    {{ $item->notes }}
-                                                                </textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Coordinate</label>
-                                                                <input type="text" class="form-control @error('coordinate') is-invalid @enderror" id="coordinate"  name="coordinate" value="{{ $item->coordinate }}">
-                                                                
-                                                                @error('coordinate')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleFormControlFile1">Example file input</label>
-                                                                <input type="file" class="form-control-file @error('location_photo') is-invalid @enderror" id="location_photo" name="location_photo">
-                                                                
-                                                                @error('location_photo')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
                                                         <div class="col-12">
-                                                            <input type="hidden" name="current_photo" id="current_photo" value="{{ $item->loc_photo }}">
-                                                            <img src="{{ 'data:image/png;base64,'.$item->loc_photo }}" class="img-fluid" alt="">
+                                                            <div class="form-group">
+                                                                <input type="hidden" name="ctg_id" id="ctg_id" value="{{ $item->id }}">
+                                                                <label>Category Name</label>
+                                                                <input type="text" class="form-control @error('category_name') is-invalid @enderror" id="category_name" name="category_name" value="{{ $item->name_category }}">
+                                                                
+                                                                @error('category_name')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Cost</label>
+                                                                <input type="text" class="form-control @error('cost') is-invalid @enderror" id="cost" name="cost" value="{{ $item->cost }}">
+                                                                
+                                                                @error('cost')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Weight (in Kg)</label><br>
+                                                                From
+                                                                <input type="number" class="form-control @error('weight_from') is-invalid @enderror" id="weight_from" name="weight_from" value="{{ $item->weight_from }}">
+                                                                @error('weight_from')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
+                                                                Until
+                                                                <input type="number" class="form-control @error('weight_until') is-invalid @enderror" id="weight_until" name="weight_until" value="{{ $item->weight_until }}">
+                                                                @error('weight_until')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -276,21 +224,21 @@
                                                 <div class="modal-header no-bd">
                                                     <h4 class="modal-title">
                                                         <span class="fw-mediumbold">Delete</span> 
-                                                        <span class="fw-light">Location</span>
+                                                        <span class="fw-light">Category</span>
                                                     </h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                            <form action="{{ route('location.delete') }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('category.delete') }}" method="POST" enctype="multipart/form-data">
                                                 @method('DELETE')
                                                 @csrf
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label>Are You Sure Want to Delete {{ $item->loc_name }} ?</label>
-                                                                <input type="hidden" name="loc_id" id="loc_id" value="{{ $item->id }}">
+                                                                <label>Are You Sure Want to Delete {{ $item->name_category }} ?</label>
+                                                                <input type="hidden" name="ctg_id" id="ctg_id" value="{{ $item->id }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -315,7 +263,7 @@
 </div>
 <script >
     $(document).ready(function() {
-        var table = $('#tableLocation').DataTable({
+        var table = $('#tableCategory').DataTable({
             "responsive": true, 
             "lengthChange": false, 
             "autoWidth": true,
