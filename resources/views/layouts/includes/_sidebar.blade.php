@@ -98,7 +98,7 @@
                     <div class="collapse" id="user">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="components/avatars.html">
+                                <a href="{{ route('user.index') }}">
                                     <span class="sub-item">Data Users</span>
                                 </a>
                             </li>

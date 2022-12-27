@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [AuthController::class, 'login'])->name('login');
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -28,3 +32,8 @@ Route::get('/category', [CategoryController::class, 'index'])->name('category.in
 Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
 Route::put('/category/update', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/delete', [CategoryController::class, 'delete'])->name('category.delete');
+
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
+Route::delete('/user/delete', [UserController::class, 'delete'])->name('user.delete');

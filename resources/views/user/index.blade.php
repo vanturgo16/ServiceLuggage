@@ -4,7 +4,7 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Category</h4>
+            <h4 class="page-title">User</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
                     <a href="{{ route('home') }}">
@@ -15,7 +15,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('category.index') }}">Category</a>
+                    <a href="{{ route('user.index') }}">User</a>
                 </li>
             </ul>
         </div>
@@ -24,61 +24,69 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">List of Category</h4>
+                            <h4 class="card-title">List of User</h4>
                             <button class="btn btn-primary btn-round ml-auto btn-sm" data-toggle="modal" data-target="#addRowModal">
                                 <i class="fa fa-plus"></i>
-                                Add Row
+                                Add User
                             </button>
                         </div>
                         <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-dialog modal-md" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header no-bd">
                                         <h4 class="modal-title">
                                             <span class="fw-mediumbold">Add</span> 
-                                            <span class="fw-light">Category</span>
+                                            <span class="fw-light">User</span>
                                         </h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label>Category Name</label>
-                                                    <input type="text" class="form-control @error('category_name') is-invalid @enderror" id="category_name" name="category_name" value="{{ old('category_name') }}">
+                                                    <label>Name</label>
+                                                    <input type="text" class="form-control @error('user_name') is-invalid @enderror" id="user_name" name="user_name" value="{{ old('user_name') }}">
                                                     
-                                                    @error('category_name')
+                                                    @error('user_name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Cost</label>
-                                                    <input type="text" class="form-control @error('cost') is-invalid @enderror" id="cost" name="cost" value="{{ old('cost') }}">
+                                                    <label>Email</label>
+                                                    <input type="email" class="form-control @error('user_email') is-invalid @enderror" id="user_email" name="user_email" value="{{ old('user_email') }}">
                                                     
-                                                    @error('cost')
+                                                    @error('user_email')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Weight (in Kg)</label><br>
-                                                    From
-                                                    <input type="number" class="form-control @error('weight_from') is-invalid @enderror" id="weight_from" name="weight_from" value="{{ old('weight_from') }}">
-                                                    @error('weight_from')
+                                                    <label>Password</label>
+                                                    <input type="text" class="form-control @error('user_password') is-invalid @enderror" id="user_password" name="user_password" value="{{ old('user_password') }}">
+                                                    
+                                                    @error('user_password')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                     @enderror
-                                                    Until
-                                                    <input type="number" class="form-control @error('weight_until') is-invalid @enderror" id="weight_until" name="weight_until" value="{{ old('weight_until') }}">
-                                                    @error('weight_until')
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="defaultSelect">Role</label>
+                                                    <select name="user_role" class="form-control @error('user_role') is-invalid @enderror" id="user_role">
+                                                        <option value="">-- Select Role --</option>
+                                                        <option value="">Super Admin</option>
+                                                        <option value="">Administrator</option>
+                                                        <option value="">Operator</option>
+                                                    </select>
+
+                                                    @error('user_role')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -123,25 +131,25 @@
                             <table id="tableCategory" class="display table table-hover" >
                                 <thead>
                                     <tr>
-                                        <th>Category</th>
-                                        <th>Weight Range</th>
-                                        <th>Cost</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody> 
-                                    @foreach ($categories as $item)
+                                    {{-- @foreach ($categories as $item) --}}
                                     <tr>
-                                        <td>{{ $item->name_category }}</td>
-                                        <td>{{ $item->weight_from." - ".$item->weight_until." (".$item->unit.")" }}</td>
-                                        <td>{{ "Rp. ".number_format($item->cost,2,",",".") }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <button class="btn btn-warning btn-round ml-auto btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}">
+                                                <button class="btn btn-warning btn-round ml-auto btn-sm" data-toggle="modal" data-target="#editModal">
                                                     <i class="fa fa-edit"></i>
                                                     Edit
                                                 </button>
-                                                <button class="btn btn-danger btn-round ml-1 btn-sm" data-toggle="modal" data-target="#deleteModal{{ $item->id }}">
+                                                <button class="btn btn-danger btn-round ml-1 btn-sm" data-toggle="modal" data-target="#deleteModal">
                                                     <i class="fas fa-trash-alt"></i>
                                                     Delete
                                                 </button>
@@ -149,7 +157,7 @@
                                         </td>
                                     </tr>
                                     {{-- Modal Edit --}}
-                                    <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                    {{-- <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-sm" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header no-bd">
@@ -215,10 +223,10 @@
                                             </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     {{-- Modal Delete --}}
-                                    <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                    {{-- <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header no-bd">
@@ -250,8 +258,8 @@
                                             </form>
                                             </div>
                                         </div>
-                                    </div>
-                                    @endforeach       
+                                    </div> --}}
+                                    {{-- @endforeach        --}}
                                 </tbody>
                             </table>
                         </div>            
