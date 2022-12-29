@@ -66,7 +66,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('item.index') }}">
                                     <span class="sub-item">Item</span>
                                 </a>
                             </li>
@@ -99,7 +99,12 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="{{ route('user.index') }}">
-                                    <span class="sub-item">Data Users</span>
+                                    <span class="sub-item">Data Users Internal</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('user.indexCust') }}">
+                                    <span class="sub-item">Data Users Customer</span>
                                 </a>
                             </li>
                             <li>

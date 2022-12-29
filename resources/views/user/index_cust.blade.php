@@ -4,7 +4,7 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">User</h4>
+            <h4 class="page-title">User Customer</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
                     <a href="{{ route('home') }}">
@@ -15,7 +15,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('user.index') }}">User Internal</a>
+                    <a href="{{ route('user.indexCust') }}">User</a>
                 </li>
             </ul>
         </div>
@@ -25,10 +25,10 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">List of User</h4>
-                            <button class="btn btn-primary btn-round ml-auto btn-sm" data-toggle="modal" data-target="#addRowModal">
+                            {{-- <button class="btn btn-primary btn-round ml-auto btn-sm" data-toggle="modal" data-target="#addRowModal">
                                 <i class="fa fa-plus"></i>
                                 Add User
-                            </button>
+                            </button> --}}
                         </div>
                         <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-md" role="document">
@@ -154,6 +154,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
+                                        <th>Verified At</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -163,9 +164,10 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->role }}</td>
+                                        <td>{{ $item->email_verified_at }}</td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <button class="btn btn-warning btn-round ml-auto btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}">
+                                                {{-- <button class="btn btn-warning btn-round ml-auto btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}">
                                                     <i class="fa fa-edit"></i>
                                                     Edit Profile
                                                 </button>
@@ -176,7 +178,7 @@
                                                 <button class="btn btn-danger btn-round ml-1 btn-sm" data-toggle="modal" data-target="#deleteModal{{ $item->id }}">
                                                     <i class="fas fa-trash-alt"></i>
                                                     Delete
-                                                </button>
+                                                </button> --}}
                                             </div>
                                         </td>
                                     </tr>
