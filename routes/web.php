@@ -3,8 +3,12 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\MappingCategoryController;
+use App\Http\Controllers\MappingItemController;
 use App\Http\Controllers\UserController;
+use App\Models\MappingItem;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,12 +38,6 @@ Route::post('/category/store', [CategoryController::class, 'store'])->name('cate
 Route::put('/category/update', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/delete', [CategoryController::class, 'delete'])->name('category.delete');
 
-//Master Item
-Route::get('/item', [CategoryController::class, 'index'])->name('item.index');
-Route::post('/item/store', [CategoryController::class, 'store'])->name('item.store');
-Route::put('/item/update', [CategoryController::class, 'update'])->name('item.update');
-Route::delete('/item/delete', [CategoryController::class, 'delete'])->name('item.delete');
-
 //Master User Internal
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
@@ -53,3 +51,17 @@ Route::get('/user-cust', [UserController::class, 'indexCust'])->name('user.index
 //Verified User
 Route::get('/verified-user/{id}', [UserController::class, 'verifiedUser'])->name('user.verified');
 Route::get('/verified', [UserController::class, 'verifiedUser'])->name('user.verified');
+
+//mapping category to location
+Route::post('/category-mapping/store', [MappingCategoryController::class, 'store'])->name('mappingctg.store');
+Route::get('/category-mapping/{id_location}', [MappingCategoryController::class, 'create'])->name('mappingctg.create');
+
+//Master Item
+Route::get('/item', [ItemController::class, 'index'])->name('item.index');
+Route::post('/item/store', [ItemController::class, 'store'])->name('item.store');
+Route::put('/item/update', [ItemController::class, 'update'])->name('item.update');
+Route::delete('/item/delete', [ItemController::class, 'delete'])->name('item.delete');
+
+//mapping item to location
+Route::post('/item-mapping/store', [MappingItemController::class, 'store'])->name('mappingitem.store');
+Route::get('/item-mapping/{id_location}', [MappingItemController::class, 'create'])->name('mappingitem.create');

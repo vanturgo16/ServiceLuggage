@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\LuggageCategory;
+use App\Models\MappingCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,20 +21,27 @@ class CategoryController extends Controller
         //dd($request->all());
         $request->validate([
             'category_name' => 'required',
-            'cost' => 'required',
             'weight_from' => 'required|lt:weight_until',
             'weight_until' => 'required'
         ]);
         
         DB::beginTransaction();
         try {
-            LuggageCategory::create([
+            $categoryStore=LuggageCategory::create([
                 'name_category' => $request->category_name,
-                'cost' => $request->cost,
                 'weight_from' => $request->weight_from,
                 'weight_until' => $request->weight_until,
                 'unit' => 'Kgs',
             ]);
+
+            //select location untuk di insert ke mapping category
+            $locations=Location::get();
+            foreach ($locations as $location) {
+                MappingCategory::create([
+                    'id_location' => $location->id,
+                    'id_category' => $categoryStore->id
+                ]);
+            }
 
             DB::commit();
 
@@ -50,7 +59,6 @@ class CategoryController extends Controller
         //dd($request->all());
         $request->validate([
             'category_name' => 'required',
-            'cost' => 'required',
             'weight_from' => 'required|lt:weight_until',
             'weight_until' => 'required'
         ]);
@@ -60,7 +68,6 @@ class CategoryController extends Controller
             LuggageCategory::where('id',$request->ctg_id)
             ->update([
                 'name_category' => $request->category_name,
-                'cost' => $request->cost,
                 'weight_from' => $request->weight_from,
                 'weight_until' => $request->weight_until,
                 'unit' => 'Kgs',
@@ -82,6 +89,7 @@ class CategoryController extends Controller
         DB::beginTransaction();
         try {
             LuggageCategory::where('id',$request->ctg_id)->delete();
+            MappingCategory::where('id_category',$request->ctg_id)->delete();
 
             DB::commit();
 

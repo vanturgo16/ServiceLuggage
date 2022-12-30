@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Location;
+use App\Models\LuggageCategory;
+use App\Models\MappingCategory;
+use App\Models\MappingItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -25,7 +29,7 @@ class LocationController extends Controller
             'coordinate' => 'required',
             'location_photo' => 'required',
         ]);
-        
+
         DB::beginTransaction();
         try {
             if($request->file('location_photo')){
@@ -46,6 +50,24 @@ class LocationController extends Controller
                 'loc_photo' => $photo,
                 'ip_address' => $ipAddress,
             ]);
+
+            //select categories untuk di insert ke mapping category
+            $categories=LuggageCategory::get();
+            foreach ($categories as $category) {
+                MappingCategory::create([
+                    'id_location' => $locationStore->id,
+                    'id_category' => $category->id
+                ]);
+            }
+
+            //select items untuk di insert ke mapping item
+            $items=Item::get();
+            foreach ($items as $item) {
+                MappingItem::create([
+                    'id_location' => $locationStore->id,
+                    'id_item' => $item->id
+                ]);
+            }
 
             DB::commit();
 
@@ -112,7 +134,11 @@ class LocationController extends Controller
                 $photo="";
             }
 
-            $locationStore=Location::where('id',$request->loc_id)->delete();
+            Location::where('id',$request->loc_id)->delete();
+
+            MappingCategory::where('id_location',$request->loc_id)->delete();
+            
+            MappingItem::where('id_location',$request->loc_id)->delete();
 
             DB::commit();
 

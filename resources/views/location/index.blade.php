@@ -149,7 +149,7 @@
                                         <th>Code Location</th>
                                         <th>Name Location</th>
                                         <th>Address</th>
-                                        <th style="width: 10%">Action</th>
+                                        <th style="width: 10%"></th>
                                     </tr>
                                 </thead>
                                 <tbody> 
@@ -159,15 +159,30 @@
                                         <td>{{ $item->loc_name }}</td>
                                         <td>{{ $item->loc_address }}</td>
                                         <td>
-                                            <div class="d-flex align-items-center">
-                                                <button class="btn btn-warning btn-round ml-auto btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}">
-                                                    <i class="fa fa-edit"></i>
-                                                    Edit
-                                                </button>
-                                                <button class="btn btn-danger btn-round ml-1 btn-sm" data-toggle="modal" data-target="#deleteModal{{ $item->id }}">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                    Delete
-                                                </button>
+                                            <div class="btn-group btn-sm" role="group">
+                                                <div class="btn-group" role="group">
+                                                  <button type="button" class="btn btn-primary btn-round ml-auto btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    Action
+                                                  </button>
+                                                  <div class="dropdown-menu">
+                                                    <button class="dropdown-item" data-toggle="modal" data-target="#editModal{{ $item->id }}">
+                                                        <i class="fa fa-edit"></i>
+                                                        Edit Data Location
+                                                    </button>
+                                                    <a class="dropdown-item" href="{{ route('mappingctg.create',$item->id) }}">
+                                                        <i class="fa fa-edit"></i>
+                                                        Create Cost for Categories
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('mappingitem.create',$item->id) }}">
+                                                        <i class="fa fa-edit"></i>
+                                                        Create Cost for Items
+                                                    </a>
+                                                    <button class="dropdown-item" data-toggle="modal" data-target="#deleteModal{{ $item->id }}">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        Delete Location
+                                                    </button>
+                                                  </div>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
