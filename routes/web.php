@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
@@ -65,3 +66,9 @@ Route::delete('/item/delete', [ItemController::class, 'delete'])->name('item.del
 //mapping item to location
 Route::post('/item-mapping/store', [MappingItemController::class, 'store'])->name('mappingitem.store');
 Route::get('/item-mapping/{id_location}', [MappingItemController::class, 'create'])->name('mappingitem.create');
+
+//Master Bank
+Route::get('/bank', [BankController::class, 'index'])->name('bank.index');
+Route::post('/bank/store', [BankController::class, 'store'])->name('bank.store');
+Route::put('/bank/update', [BankController::class, 'update'])->name('bank.update');
+Route::delete('/bank/delete', [BankController::class, 'delete'])->name('bank.delete');

@@ -82,6 +82,11 @@
                     <div class="collapse" id="data">
                         <ul class="nav nav-collapse">
                             <li>
+                                <a href="{{ route('bank.index') }}">
+                                    <span class="sub-item">Bank</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('location.index') }}">
                                     <span class="sub-item">Location</span>
                                 </a>
