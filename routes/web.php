@@ -6,9 +6,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\MappingBankController;
 use App\Http\Controllers\MappingCategoryController;
 use App\Http\Controllers\MappingItemController;
 use App\Http\Controllers\UserController;
+use App\Models\MappingBank;
 use App\Models\MappingItem;
 use Illuminate\Support\Facades\Route;
 
@@ -72,3 +74,8 @@ Route::get('/bank', [BankController::class, 'index'])->name('bank.index');
 Route::post('/bank/store', [BankController::class, 'store'])->name('bank.store');
 Route::put('/bank/update', [BankController::class, 'update'])->name('bank.update');
 Route::delete('/bank/delete', [BankController::class, 'delete'])->name('bank.delete');
+
+//mapping bank to location
+Route::post('/bank-mapping/store', [MappingBankController::class, 'store'])->name('mappingbank.store');
+Route::get('/bank-mapping/{id_location}', [MappingBankController::class, 'create'])->name('mappingbank.create');
+Route::delete('/bank-mapping/delete', [MappingBankController::class, 'delete'])->name('mappingbank.delete');

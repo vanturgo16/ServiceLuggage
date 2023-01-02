@@ -177,6 +177,10 @@
                                                         <i class="fa fa-edit"></i>
                                                         Create Cost for Items
                                                     </a>
+                                                    <a class="dropdown-item" href="{{ route('mappingbank.create',$item->id) }}">
+                                                        <i class="fa fa-edit"></i>
+                                                        Add Banks for This Location
+                                                    </a>
                                                     <button class="dropdown-item" data-toggle="modal" data-target="#deleteModal{{ $item->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                         Delete Location
