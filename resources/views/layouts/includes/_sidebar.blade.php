@@ -129,8 +129,8 @@
                     <div class="collapse" id="report">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="components/avatars.html">
-                                    <span class="sub-item">Order Report</span>
+                                <a href="{{ route('report.order.index') }}">
+                                    <span class="sub-item">Report Order</span>
                                 </a>
                             </li>
                         </ul>

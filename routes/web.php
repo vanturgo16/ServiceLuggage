@@ -9,6 +9,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MappingBankController;
 use App\Http\Controllers\MappingCategoryController;
 use App\Http\Controllers\MappingItemController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Models\MappingBank;
 use App\Models\MappingItem;
@@ -79,3 +80,7 @@ Route::delete('/bank/delete', [BankController::class, 'delete'])->name('bank.del
 Route::post('/bank-mapping/store', [MappingBankController::class, 'store'])->name('mappingbank.store');
 Route::get('/bank-mapping/{id_location}', [MappingBankController::class, 'create'])->name('mappingbank.create');
 Route::delete('/bank-mapping/delete', [MappingBankController::class, 'delete'])->name('mappingbank.delete');
+
+//Reporting
+Route::get('/report/order', [ReportController::class, 'indexOrder'])->name('report.order.index');
+Route::post('/report/order-submit', [ReportController::class, 'submitReportOrder'])->name('report.order.submit');
