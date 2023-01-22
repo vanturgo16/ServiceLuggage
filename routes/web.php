@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GenInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LocationController;
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AuthController::class, 'login'])->name('login');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/faq', [GenInfoController::class, 'faq'])->name('faq');
+Route::get('/tc', [GenInfoController::class, 'tc'])->name('tc');
 
 //Master Location
 Route::get('/location', [LocationController::class, 'index'])->name('location.index');

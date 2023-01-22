@@ -97,6 +97,12 @@
                 title: 'List Order', 
                 text: '<i class="fas fa-file-excel"></i> Export to Excel', 
                 extend: 'excel' 
+            },{
+                title: 'List Order', 
+                text: '<i class="fas fa-file-pdf"></i> Export to PDF', 
+                extend: 'pdf',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
             }]
         });
     });
