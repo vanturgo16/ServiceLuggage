@@ -363,12 +363,23 @@ class apiController extends APIBaseController
 		$validator = Validator::make($request->all(), [
 			'id_user' => 'required',
 			'id_location' => 'required',
-			'date_start' => 'required|date',
+			'date_start' => 'required|date|after_or_equal:now',
 			'date_finish' => 'required|date|after:date_start',
 		]);
 
 		if ($validator->fails()) {
 			return $this->sendError('Validation Error.', $validator->errors());
+		}
+
+        //select ke table temporary orders
+        $tempOrdersCount = TemporaryOrder::where('id_location', $request->id_location)
+        ->where('id_user', $request->id_user)
+        ->count();
+
+        //dd($tempOrdersCount);
+
+        if ($tempOrdersCount == '0') {
+			return $this->sendError('No Order Created.', $validator->errors());
 		}
 
 		DB::beginTransaction();
@@ -505,9 +516,11 @@ class apiController extends APIBaseController
 	public function paymentOrder(Request $request)
 	{
 		$validator = Validator::make($request->all(), [
-			'id_order' => 'required',
+			'id_order' => 'required|exists:orders,id',
 			'id_bank' => 'required',
 		]);
+
+        //dd($request->all());
 
 		if ($validator->fails()) {
 			return $this->sendError('Validation Error.', $validator->errors());
@@ -527,6 +540,16 @@ class apiController extends APIBaseController
 
 		//Status order (Opened, Waiting Payment, Paid)
 		//Status rent (Saved, Returned)
+        $idLoc=$cekOrder->id_location;
+
+        //payment method exist
+        $checkPaymentMethod=MappingBank::where('id_location',$idLoc)
+        ->where('id_bank',$request->id_bank)
+        ->count();
+
+        if ($checkPaymentMethod == '0') {
+			return $this->sendError('Error', 'Payment Method Not Support in This Location');
+		}
 
 		DB::beginTransaction();
 		try {
