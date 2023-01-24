@@ -136,6 +136,22 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#upload">
+                        <i class="fas fa-upload"></i>
+                        <p>Upload Files</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="upload">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('apk.index') }}">
+                                    <span class="sub-item">APK</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

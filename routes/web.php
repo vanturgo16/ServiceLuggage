@@ -11,6 +11,7 @@ use App\Http\Controllers\MappingBankController;
 use App\Http\Controllers\MappingCategoryController;
 use App\Http\Controllers\MappingItemController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Models\MappingBank;
 use App\Models\MappingItem;
@@ -78,6 +79,10 @@ Route::get('/bank', [BankController::class, 'index'])->name('bank.index');
 Route::post('/bank/store', [BankController::class, 'store'])->name('bank.store');
 Route::put('/bank/update', [BankController::class, 'update'])->name('bank.update');
 Route::delete('/bank/delete', [BankController::class, 'delete'])->name('bank.delete');
+
+//Master APK
+Route::get('/apk', [UploadController::class, 'index'])->name('apk.index');
+Route::post('/apk/upload', [UploadController::class, 'uploadApk'])->name('apk.upload');
 
 //mapping bank to location
 Route::post('/bank-mapping/store', [MappingBankController::class, 'store'])->name('mappingbank.store');
